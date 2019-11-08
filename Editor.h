@@ -10,3 +10,7 @@ class Editor{
     void loop();
 
 };
+int main(){
+   Editor edt;
+   edt.loop();
+}
