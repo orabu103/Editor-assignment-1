@@ -18,6 +18,12 @@ void Editor::loop(){
         else if(str=="%p") Doc.printAll();
         else if(str=="d") Doc.d();
         else if(str=="i") Doc.i();
+        else if(str[0]=='?'){
+             if(str.size()!=1){
+                search = str.substr(1,str.size()-1);
+                Doc.backward(search);
+             }
+        } 
         else if(str[0]=='/'){
             if(str.size()!=1){
                 search = str.substr(1,str.size()-1);
@@ -27,7 +33,9 @@ void Editor::loop(){
                 Doc.repeatSrearch(search);
             }
         }
-        else if(is_number) Doc.number(str);
+        else if(is_number(str)){
+             Doc.number(str);
+        }
         cin >> str;
     }
 }
