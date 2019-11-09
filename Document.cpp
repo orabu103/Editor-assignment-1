@@ -55,31 +55,55 @@ void Document::number(string str){ //makes line #number the current line
     cout << vec[pos-1] << endl;
 }
 void Document::search(string str){ //searches forward after current line for the specified text
-         for(int i=pos; i < vec.size(); i++){
-             string ans = vec[i];
-             if(ans.find(str)!= std::string::npos){
-                cout << vec[i] << endl;
-                pos=i+1;
+        bool flag = true;
+        int ind = pos;
+        while(flag){
+            if(ind > (vec.size()-1)) ind=0;  
+            string ans = vec[ind];
+            if(ans.find(str)!= std::string::npos){
+                cout << vec[ind] << endl;
+                pos = ind+1;
+                flag= false;
                 break;
-             }
-         }
-           
+            }
+            ind+=1;
+             if(ind==pos) flag= false;
+        }
 }
 void Document::repeatSrearch(string str){ //Repeat search
     Document::search(str);
 }
 void Document::backward(string str){//searches backward
-    for(int i=pos-1; i >= 0; i--){
-             string ans = vec[i];
-             if(ans.find(str)!= std::string::npos){
-                cout << vec[i] << endl;
-                pos=i+1;
+     bool flag = true;
+        int ind = pos-1;
+        while(flag){
+            if(ind<=0) ind=vec.size()-1;
+            string ans = vec[ind-1];
+            if(ans.find(str)!= std::string::npos){
+                cout << vec[ind-1] << endl;
+                pos=ind;
+                flag= false;
                 break;
-             }
-         }
+            }
+            ind-=1;
+            if(ind==pos) flag= false;
+           
+            
+        }
+}
+void Document::replaces(string Old , string New){ //replaces old string with new in current line 
+     size_t posi = 0;
+     string ans = vec[pos-1];
+     std::string token;
+    (posi = ans.find(Old)) != std::string::npos;
+    string sub = ans.substr(0,posi);
+    ans.erase(0, posi);
+    sub = sub.append(New);
+    ans.erase(0, Old.size()-1);
+    sub = sub.append(ans.substr(0,ans.size()-1));
+    vec[pos-1]=(vec.begin()+pos-1,sub);
+
+
 }
 
-void Document::replaces(){ //replaces old string with new in current line 
-
-}
 
