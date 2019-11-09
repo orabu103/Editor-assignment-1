@@ -20,7 +20,7 @@ class Document{
     void repeatSrearch(string str);
     void number(string str);
     void backward(string str);
-    void replaces();//
+    void replaces(string Old , string New);
 
         
 
