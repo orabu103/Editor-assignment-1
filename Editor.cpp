@@ -1,4 +1,5 @@
 #include "Editor.h"
+
 bool is_number(const std::string& s)
 {
     std::string::const_iterator it = s.begin();
@@ -35,6 +36,18 @@ void Editor::loop(){
         }
         else if(is_number(str)){
              Doc.number(str);
+        }
+        else if(str[0]=='s' && str[1]=='/'){
+            string arr[3];
+            size_t pos = 0;
+            string token;
+            int i =0;
+            while ((pos = str.find('/')) != std::string::npos) {
+                arr[i] = str.substr(0, pos);
+                str.erase(0, pos + 1);
+                i++;
+            }
+            Doc.replaces(arr[1],arr[2]);
         }
         cin >> str;
     }
